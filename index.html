@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name — Microbiology & Infectious Disease</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white:      #ffffff;
+      --bg:         #fafaf8;
+      --surface:    #f4f2ee;
+      --ink:        #1c1c1a;
+      --ink2:       #3a3a36;
+      --muted:      #7a7a72;
+      --border:     #e0ddd6;
+      --border2:    #ccc9bf;
+      --red:        #b5121b;
+      --red-light:  #f5e6e7;
+      --red-mid:    #d94040;
+      --serif:      'Libre Baskerville', Georgia, serif;
+      --sans:       'Source Sans 3', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 5rem;
+      background: rgba(250,250,248,.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .logo {
+      font-family: var(--serif); font-size: 1.05rem; font-weight: 700;
+      color: var(--ink); text-decoration: none; letter-spacing: .01em;
+    }
+    .logo span { color: var(--red); }
+    .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: .82rem;
+      font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-pill {
+      display: flex; align-items: center; gap: .5rem;
+      font-size: .75rem; font-family: var(--sans); font-weight: 500;
+      color: var(--red); border: 1.5px solid var(--red);
+      padding: .28rem .9rem; letter-spacing: .06em;
+    }
+    .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 420px;
+      align-items: center; gap: 5rem;
+      padding: 9rem 5rem 5rem;
+    }
+    .hero-kicker {
+      display: flex; align-items: center; gap: .8rem;
+      font-size: .73rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.8rem; font-weight: 500;
+      opacity: 0; animation: fadeUp .5s .1s forwards;
+    }
+    .hero-kicker-line { width: 30px; height: 1px; background: var(--red); }
+    .hero-kicker span { color: var(--red); }
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 5vw, 5rem);
+      font-weight: 700; line-height: 1.05; letter-spacing: -.02em;
+      color: var(--ink);
+      opacity: 0; animation: fadeUp .7s .25s forwards;
+    }
+    h1 em { font-style: italic; color: var(--red); }
+    .hero-sub {
+      margin-top: 1.8rem; max-width: 520px;
+      color: var(--ink2); font-size: 1.05rem; font-weight: 300; line-height: 1.85;
+      opacity: 0; animation: fadeUp .7s .4s forwards;
+    }
+    .hero-sub strong { font-weight: 600; color: var(--ink); }
+    .hero-cta {
+      margin-top: 2.8rem; display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp .7s .55s forwards;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.8rem; font-family: var(--sans);
+      font-size: .8rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; text-decoration: none; cursor: pointer;
+      transition: all .22s;
+    }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: #8f0d14; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(181,18,27,.25); }
+    .btn-outline { border: 1.5px solid var(--border2); color: var(--ink2); background: transparent; }
+    .btn-outline:hover { border-color: var(--ink); color: var(--ink); }
+
+    /* Hero illustration panel */
+    .hero-visual {
+      opacity: 0; animation: fadeUp .9s .45s forwards;
+      position: relative;
+    }
+    .visual-card {
+      background: var(--white); border: 1px solid var(--border);
+      padding: 1.8rem;
+      box-shadow: 0 2px 24px rgba(0,0,0,.06);
+    }
+    .visual-label {
+      font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.2rem; font-weight: 500;
+    }
+    #pathogenSVG { width: 100%; display: block; }
+    .visual-legend {
+      display: flex; gap: 1.2rem; flex-wrap: wrap; margin-top: 1.2rem;
+    }
+    .leg { display: flex; align-items: center; gap: .4rem; font-size: .72rem; color: var(--muted); }
+    .leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Section base ── */
+    section { padding: 6rem 5rem; }
+    .sec-label {
+      font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--red); font-weight: 600; margin-bottom: .5rem;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 3.5vw, 3rem);
+      font-weight: 700; letter-spacing: -.02em; line-height: 1.1;
+      margin-bottom: 3.5rem; color: var(--ink);
+    }
+    h2 em { font-style: italic; color: var(--red); }
+
+    /* ── About ── */
+    #about { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about-layout { display: grid; grid-template-columns: 1fr 300px; gap: 5rem; align-items: start; }
+    .about-body { font-size: .97rem; color: var(--ink2); font-weight: 300; line-height: 1.9; }
+    .about-body p { margin-bottom: 1.2rem; }
+    .about-body strong { color: var(--ink); font-weight: 600; }
+
+    .skills-block { margin-top: 2.8rem; }
+    .skills-category-title {
+      font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+      font-weight: 600; color: var(--muted); padding-bottom: .6rem;
+      border-bottom: 1.5px solid var(--ink); margin-bottom: .8rem;
+    }
+    .skill-rows { display: flex; flex-direction: column; }
+    .skill-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .55rem 0; border-bottom: 1px solid var(--border);
+      font-size: .88rem; color: var(--ink2);
+    }
+    .skill-pips { display: flex; gap: 3px; }
+    .pip { width: 8px; height: 8px; border-radius: 50%; background: var(--border2); }
+    .pip.filled { background: var(--red); }
+
+    /* Sidebar info blocks */
+    .info-stack { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); }
+    .info-block {
+      padding: 1.4rem 1.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-block:last-child { border-bottom: none; }
+    .ib-title {
+      font-size: .66rem; letter-spacing: .16em; text-transform: uppercase;
+      font-weight: 600; color: var(--red); margin-bottom: .7rem;
+    }
+    .ib-line { font-size: .87rem; color: var(--ink2); line-height: 1.5; }
+    .ib-line strong { color: var(--ink); font-weight: 600; }
+    .ib-line small { font-size: .78rem; color: var(--muted); display: block; }
+
+    /* ── Research ── */
+    #research { }
+    .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .res-card {
+      background: var(--white); padding: 2.5rem;
+      border-top: 3px solid transparent;
+      transition: border-color .2s, background .2s;
+    }
+    .res-card:hover { border-top-color: var(--red); background: var(--bg); }
+    .res-card-num {
+      font-family: var(--serif); font-size: .78rem; font-weight: 400;
+      color: var(--muted); letter-spacing: .04em; margin-bottom: 1.2rem;
+      font-style: italic;
+    }
+    .res-card-title {
+      font-family: var(--serif); font-size: 1.15rem; font-weight: 700;
+      color: var(--ink); line-height: 1.3; margin-bottom: .8rem;
+    }
+    .res-card-desc {
+      font-size: .88rem; color: var(--ink2); font-weight: 300;
+      line-height: 1.8;
+    }
+    .res-card-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: 1.2rem; }
+    .res-tag {
+      font-size: .7rem; padding: .2rem .65rem; font-weight: 500;
+      background: var(--surface); color: var(--muted);
+      border: 1px solid var(--border); letter-spacing: .04em;
+    }
+    .res-card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid var(--border);
+    }
+    .res-status {
+      font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+      font-weight: 600;
+    }
+    .res-status.ongoing { color: var(--red); }
+    .res-status.complete { color: var(--muted); }
+    .res-link {
+      font-size: .75rem; color: var(--ink2); text-decoration: none;
+      letter-spacing: .06em; text-transform: uppercase; font-weight: 500;
+      transition: color .2s;
+    }
+    .res-link:hover { color: var(--red); }
+
+    /* ── Publications ── */
+    #publications { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .pub-list { display: flex; flex-direction: column; }
+    .pub-entry {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 2.5rem; padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+    .pub-entry:last-child { border-bottom: none; }
+    .pub-year { font-family: var(--serif); font-size: .9rem; color: var(--muted); font-style: italic; padding-top: .15rem; }
+    .pub-badge {
+      display: inline-block; font-size: .62rem; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: .15rem .6rem; margin-bottom: .5rem;
+      background: var(--red-light); color: var(--red);
+      border: 1px solid rgba(181,18,27,.2);
+    }
+    .pub-title {
+      font-family: var(--serif); font-size: 1.0rem; font-weight: 700;
+      color: var(--ink); line-height: 1.4; margin-bottom: .4rem;
+    }
+    .pub-authors { font-size: .85rem; color: var(--muted); margin-bottom: .3rem; }
+    .pub-authors strong { color: var(--ink2); font-weight: 600; }
+    .pub-journal { font-size: .85rem; font-style: italic; color: var(--ink2); }
+    .pub-doi { font-size: .78rem; color: var(--muted); margin-top: .2rem; }
+    .pub-actions { display: flex; gap: 1rem; margin-top: .9rem; }
+    .pub-act {
+      font-size: .72rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--red); border-bottom: 1px solid rgba(181,18,27,.3);
+      transition: border-color .2s;
+    }
+    .pub-act:hover { border-color: var(--red); }
+
+    /* ── Contact ── */
+    #contact { }
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
+    }
+    .contact-left {}
+    .contact-left > p {
+      font-size: 1rem; font-weight: 300; color: var(--ink2); line-height: 1.9;
+      max-width: 420px; margin-bottom: 2.5rem;
+    }
+    .contact-email {
+      display: block; font-family: var(--serif);
+      font-size: clamp(1.1rem, 2.5vw, 1.7rem); font-weight: 700;
+      color: var(--ink); text-decoration: none;
+      border-bottom: 2px solid var(--red); padding-bottom: .2rem;
+      width: fit-content; transition: color .2s;
+    }
+    .contact-email:hover { color: var(--red); }
+    .contact-social { display: flex; flex-direction: column; gap: .6rem; margin-top: 2.5rem; }
+    .csoc {
+      display: flex; align-items: center; gap: .8rem;
+      font-size: .83rem; color: var(--muted); text-decoration: none;
+      transition: color .2s;
+    }
+    .csoc:hover { color: var(--ink); }
+    .csoc-icon { width: 32px; height: 32px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: .7rem; color: var(--muted); flex-shrink: 0; }
+    .contact-right {}
+    .cta-box {
+      background: var(--ink); color: var(--bg);
+      padding: 2.8rem; margin-bottom: 1.5rem;
+    }
+    .cta-box h3 {
+      font-family: var(--serif); font-size: 1.3rem; font-weight: 700;
+      margin-bottom: .8rem; color: #fff;
+    }
+    .cta-box p { font-size: .9rem; font-weight: 300; opacity: .75; line-height: 1.7; margin-bottom: 1.8rem; }
+    .btn-white { background: #fff; color: var(--ink); }
+    .btn-white:hover { background: var(--bg); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 2rem 5rem; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: .78rem; color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--red); }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      nav { padding: 1.1rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; }
+      .hero-visual { display: none; }
+      section { padding: 4rem 1.5rem; }
+      .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .res-grid { grid-template-columns: 1fr; }
+      .pub-entry { grid-template-columns: 1fr; gap: .4rem; }
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+      footer { flex-direction: column; gap: .5rem; text-align: center; padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ── -->
+  <nav>
+    <a class="logo" href="#hero">Your Name<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-pill">
+      <div class="nav-dot"></div>
+      Open to opportunities
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section id="hero">
+    <div>
+      <div class="hero-kicker">
+        <div class="hero-kicker-line"></div>
+        <span>PhD Student</span> · Microbiology & Infectious Disease
+      </div>
+      <h1>
+        How pathogens<br>
+        <em>outsmart</em><br>
+        the host.
+      </h1>
+      <p class="hero-sub">
+        I'm <strong>Your Name</strong>, a PhD student investigating the molecular
+        strategies pathogens use to subvert host immune defences — and how we can
+        exploit those mechanisms to develop better therapies.
+      </p>
+      <div class="hero-cta">
+        <a href="#research" class="btn btn-red">View Research</a>
+        <a href="cv.pdf" class="btn btn-outline" target="_blank">Download CV</a>
+      </div>
+    </div>
+
+    <!-- Animated host-pathogen illustration -->
+    <div class="hero-visual">
+      <div class="visual-card">
+        <div class="visual-label">Host–Pathogen Interface · Conceptual</div>
+        <svg id="pathogenSVG" viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg">
+          <!-- Host cell (large) -->
+          <ellipse cx="180" cy="155" rx="130" ry="95" fill="#fef0f0" stroke="#e8c0c0" stroke-width="1.5"/>
+          <!-- Nucleus -->
+          <ellipse cx="165" cy="160" rx="48" ry="38" fill="#fde0e0" stroke="#d49090" stroke-width="1" stroke-dasharray="4,3"/>
+          <!-- Nucleus label -->
+          <text x="165" y="164" text-anchor="middle" font-size="9" fill="#b5121b" font-family="Libre Baskerville,serif" font-style="italic">nucleus</text>
+          <!-- Host cell membrane spikes -->
+          <g stroke="#c08080" stroke-width="1.2" fill="none">
+            <line x1="50" y1="155" x2="38" y2="148"/><line x1="50" y1="155" x2="36" y2="160"/>
+            <line x1="60" y1="105" x2="50" y2="93"/><line x1="60" y1="105" x2="55" y2="91"/>
+            <line x1="120" y1="63" x2="116" y2="50"/><line x1="120" y1="63" x2="125" y2="50"/>
+            <line x1="200" y1="60" x2="196" y2="47"/><line x1="200" y1="60" x2="205" y2="47"/>
+            <line x1="270" y1="90" x2="278" y2="80"/><line x1="270" y1="90" x2="282" y2="88"/>
+            <line x1="305" y1="150" x2="318" y2="145"/><line x1="305" y1="150" x2="319" y2="156"/>
+            <line x1="280" y1="215" x2="290" y2="225"/><line x1="280" y1="215" x2="286" y2="228"/>
+            <line x1="160" y1="248" x2="158" y2="262"/><line x1="160" y1="248" x2="165" y2="261"/>
+            <line x1="90" y1="225" x2="80" y2="233"/>
+          </g>
+          <!-- Pathogen bacteria 1 (entering) -->
+          <g transform="translate(56,88) rotate(-30)">
+            <ellipse cx="0" cy="0" rx="14" ry="7" fill="#b5121b" opacity=".85"/>
+            <line x1="-10" y1="-4" x2="-18" y2="-10" stroke="#b5121b" stroke-width="1"/>
+            <line x1="-10" y1="3" x2="-19" y2="8" stroke="#b5121b" stroke-width="1"/>
+            <line x1="10" y1="-4" x2="18" y2="-10" stroke="#b5121b" stroke-width="1"/>
+            <line x1="10" y1="3" x2="19" y2="8" stroke="#b5121b" stroke-width="1"/>
+          </g>
+          <!-- Pathogen bacteria 2 (inside) -->
+          <g transform="translate(230,130)">
+            <ellipse cx="0" cy="0" rx="12" ry="6" fill="#d94040" opacity=".7"/>
+            <line x1="-8" y1="-3" x2="-14" y2="-7" stroke="#d94040" stroke-width="1"/>
+            <line x1="8" y1="3" x2="14" y2="7" stroke="#d94040" stroke-width="1"/>
+          </g>
+          <!-- Pathogen bacteria 3 (outside) -->
+          <g transform="translate(295,68) rotate(20)">
+            <ellipse cx="0" cy="0" rx="13" ry="6" fill="#b5121b" opacity=".9"/>
+            <line x1="-9" y1="-3" x2="-17" y2="-6" stroke="#b5121b" stroke-width="1"/>
+            <line x1="-9" y1="3" x2="-17" y2="7" stroke="#b5121b" stroke-width="1"/>
+            <line x1="9" y1="-3" x2="17" y2="-6" stroke="#b5121b" stroke-width="1"/>
+            <line x1="9" y1="3" x2="17" y2="7" stroke="#b5121b" stroke-width="1"/>
+          </g>
+          <!-- Immune receptor signals (dashed lines from membrane) -->
+          <g stroke="#b5121b" stroke-width=".8" stroke-dasharray="3,3" opacity=".5">
+            <line x1="56" y1="90" x2="75" y2="105"/>
+            <line x1="295" y1="76" x2="278" y2="100"/>
+          </g>
+          <!-- Signalling arrows inside cell -->
+          <g stroke="#c08080" stroke-width=".9" stroke-dasharray="2,3" opacity=".6">
+            <line x1="230" y1="130" x2="210" y2="148"/>
+            <line x1="100" y1="145" x2="120" y2="148"/>
+          </g>
+          <!-- Host cell label -->
+          <text x="88" y="210" font-size="8.5" fill="#c08080" font-family="Source Sans 3,sans-serif" opacity=".8">host cell</text>
+          <!-- Pathogen labels -->
+          <text x="28" y="80" font-size="8" fill="#b5121b" font-family="Source Sans 3,sans-serif" font-weight="600">pathogen</text>
+          <text x="295" y="60" font-size="8" fill="#b5121b" font-family="Source Sans 3,sans-serif" font-weight="600">pathogen</text>
+          <!-- Animated pulsing circles around outside bacteria -->
+          <circle cx="295" cy="68" r="18" fill="none" stroke="#b5121b" stroke-width=".8" opacity=".3">
+            <animate attributeName="r" values="18;26;18" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".3;0;.3" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="56" cy="88" r="16" fill="none" stroke="#b5121b" stroke-width=".8" opacity=".3">
+            <animate attributeName="r" values="16;24;16" dur="2s" begin=".8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values=".3;0;.3" dur="2s" begin=".8s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <div class="visual-legend">
+          <div class="leg"><div class="leg-dot" style="background:#b5121b"></div>Pathogen</div>
+          <div class="leg"><div class="leg-dot" style="background:#e8c0c0"></div>Host cell</div>
+          <div class="leg"><div class="leg-dot" style="background:#d49090"></div>Nucleus</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── About ── -->
+  <section id="about">
+    <div class="sec-label reveal">About</div>
+    <h2 class="reveal">The scientist<br><em>behind the research.</em></h2>
+    <div class="about-layout">
+      <div class="about-body reveal">
+        <p>
+          I am a <strong>PhD student in Microbiology and Infectious Disease</strong> at
+          [Your University], working in the [Lab Name] laboratory under the supervision
+          of Prof. [Supervisor]. My research centres on understanding how pathogens
+          — particularly [your organism, e.g. intracellular bacteria / RNA viruses] —
+          manipulate host immune signalling to establish infection and persist in host tissue.
+        </p>
+        <p>
+          My work combines <strong>live-cell imaging</strong>, <strong>transcriptomics</strong>,
+          and <strong>genetic perturbation approaches</strong> (CRISPR screens, siRNA knockdown)
+          to dissect the molecular dialogue between pathogen virulence factors and host
+          pattern recognition receptors. I'm particularly interested in
+          <strong>NF-κB and interferon signalling pathways</strong> and how pathogens
+          selectively silence or co-opt them.
+        </p>
+        <p>
+          Before my PhD, I completed an MSc in [Subject] at [University], where my
+          dissertation on [topic] was awarded [distinction / prize]. I also spent
+          [X] months as a research assistant in [Lab/Institution], gaining hands-on
+          experience in [relevant techniques].
+        </p>
+        <p>
+          Outside the lab, I am an active member of [Society / Journal Club], I
+          peer-review for [Journal], and I mentor undergraduates through [programme].
+          I am passionate about accessible science communication and have written for
+          [blog / magazine] on infectious disease topics.
+        </p>
+
+        <div class="skills-block">
+          <div class="skills-category-title">Laboratory Methods</div>
+          <div class="skill-rows">
+            <div class="skill-row">Intracellular infection assays (gentamicin protection)
+              <div class="skill-pips"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div></div>
+            </div>
+            <div class="skill-row">Flow cytometry &amp; cell sorting
+              <div class="skill-pips"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div></div>
+            </div>
+            <div class="skill-row">Confocal &amp; live-cell fluorescence microscopy
+              <div class="skill-pips"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div></div>
+            </div>
+            <div class="skill-row">CRISPR-Cas9 knockout &amp; genome-wide screens
+              <div class="skill-pips"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div></div>
+            </div>
+            <div class="skill-row">RNA-seq / scRNA-seq library preparation
+              <div class="skill-pips"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div></div>
+            </div>
+            <div class="skill-row">Western blot, Co-IP, proximity ligation
+              <div class="skill-pips"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skills-block" style="margin-top:2rem">
+          <div class="skills-category-title">Computational &amp; Bioinformatics</div>
+          <div class="skill-rows">
+            <div class="skill-row">Python (pandas, seaborn, scanpy)
+              <div class="skill-pips"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div></div>
+            </div>
+            <div class="skill-row">R / DESeq2 / edgeR (differential expression)
+              <div class="skill-pips"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div><div class="pip"></div></div>
+            </div>
+            <div class="skill-row">GSEA, KEGG, Gene Ontology analysis
+              <div class="skill-pips"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div></div>
+            </div>
+            <div class="skill-row">ImageJ / CellProfiler image analysis
+              <div class="skill-pips"><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip filled"></div><div class="pip"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="info-stack reveal reveal-delay-1">
+          <div class="info-block">
+            <div class="ib-title">Education</div>
+            <div class="ib-line">
+              <strong>PhD Microbiology &amp; Infectious Disease</strong>
+              <small>[Your University] · [City], [Country]</small>
+              <small style="color:var(--muted);margin-top:.3rem">Started [Year] · Advisor: Prof. [Name]</small>
+            </div>
+            <div class="ib-line" style="margin-top:.8rem">
+              <strong>MSc [Subject]</strong>
+              <small>[University] · [Year]</small>
+            </div>
+            <div class="ib-line" style="margin-top:.8rem">
+              <strong>BSc [Subject]</strong>
+              <small>[University] · [Year]</small>
+            </div>
+          </div>
+          <div class="info-block">
+            <div class="ib-title">Research Focus</div>
+            <div class="ib-line">Host–pathogen interactions<br>Innate immune evasion<br>NF-κB &amp; interferon signalling<br>[Your pathogen, e.g. <em>Salmonella</em> / SARS-CoV-2]</div>
+          </div>
+          <div class="info-block">
+            <div class="ib-title">Awards</div>
+            <div class="ib-line">[Fellowship name, Year]</div>
+            <div class="ib-line">[Best talk / poster award]</div>
+            <div class="ib-line">[Travel grant]</div>
+          </div>
+          <div class="info-block">
+            <div class="ib-title">Location</div>
+            <div class="ib-line">Kathmandu, Nepal 🇳🇵<br><small>Open to international opportunities</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Research ── -->
+  <section id="research">
+    <div class="sec-label reveal">Research Projects</div>
+    <h2 class="reveal">Investigating the<br><em>host–pathogen dialogue.</em></h2>
+    <div class="res-grid reveal">
+      <div class="res-card">
+        <div class="res-card-num">Project I</div>
+        <div class="res-card-title">Pathogen Subversion of NF-κB Signalling via Effector Protein [X]</div>
+        <p class="res-card-desc">
+          Using CRISPR screens and proximity-ligation proteomics to identify host
+          binding partners of secreted effector [X] from [pathogen]. Initial data
+          suggests a novel interaction with IκB kinase that dampens pro-inflammatory
+          cytokine production during early infection.
+        </p>
+        <div class="res-card-tags">
+          <span class="res-tag">CRISPR screen</span>
+          <span class="res-tag">NF-κB</span>
+          <span class="res-tag">Effector biology</span>
+          <span class="res-tag">BioID proteomics</span>
+        </div>
+        <div class="res-card-footer">
+          <span class="res-status ongoing">● Ongoing</span>
+          <a href="#" class="res-link">Preprint coming →</a>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="res-card-num">Project II</div>
+        <div class="res-card-title">Single-Cell Transcriptomics of Infected Macrophage Populations</div>
+        <p class="res-card-desc">
+          scRNA-seq of primary human macrophages during [pathogen] infection at 2, 6,
+          and 24 h post-infection. Identified a transcriptionally distinct
+          "tolerised" macrophage subpopulation that is preferentially exploited
+          for intracellular replication.
+        </p>
+        <div class="res-card-tags">
+          <span class="res-tag">scRNA-seq</span>
+          <span class="res-tag">Macrophage biology</span>
+          <span class="res-tag">Scanpy</span>
+          <span class="res-tag">Immune tolerance</span>
+        </div>
+        <div class="res-card-footer">
+          <span class="res-status ongoing">● Ongoing</span>
+          <a href="#" class="res-link">View data →</a>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="res-card-num">Project III</div>
+        <div class="res-card-title">Interferon-Stimulated Gene Profiling During [Virus] Infection</div>
+        <p class="res-card-desc">
+          Bulk RNA-seq time-course of [virus]-infected cells with and without IFN-β
+          pre-treatment. Identified 12 ISGs significantly suppressed during active
+          replication; three candidates validated by individual knockdown and plaque
+          assay.
+        </p>
+        <div class="res-card-tags">
+          <span class="res-tag">RNA-seq</span>
+          <span class="res-tag">Interferon</span>
+          <span class="res-tag">Antiviral ISGs</span>
+          <span class="res-tag">DESeq2</span>
+        </div>
+        <div class="res-card-footer">
+          <span class="res-status complete">Completed</span>
+          <a href="#" class="res-link">Published →</a>
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="res-card-num">Project IV · MSc</div>
+        <div class="res-card-title">Comparative Genomics of [Pathogen] Clinical Isolates and Virulence Factors</div>
+        <p class="res-card-desc">
+          Whole-genome sequencing of 42 clinical [pathogen] isolates from [region].
+          Identified novel SNPs in virulence factor gene [Y] associated with
+          increased antibiotic resistance and tissue invasiveness. Formed basis of
+          MSc dissertation.
+        </p>
+        <div class="res-card-tags">
+          <span class="res-tag">Genomics</span>
+          <span class="res-tag">WGS</span>
+          <span class="res-tag">Virulence factors</span>
+          <span class="res-tag">AMR</span>
+        </div>
+        <div class="res-card-footer">
+          <span class="res-status complete">Completed</span>
+          <a href="#" class="res-link">Publication →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Publications ── -->
+  <section id="publications">
+    <div class="sec-label reveal">Publications &amp; Presentations</div>
+    <h2 class="reveal">Scientific<br><em>contributions.</em></h2>
+    <div class="pub-list reveal">
+      <div class="pub-entry">
+        <div class="pub-year">2025</div>
+        <div>
+          <span class="pub-badge">Preprint</span>
+          <div class="pub-title">Effector Protein [X] Targets IκB Kinase to Suppress NF-κB-Dependent Inflammation During [Pathogen] Infection</div>
+          <div class="pub-authors"><strong>Your Name</strong>, Co-Author A, Co-Author B, Prof. Supervisor</div>
+          <div class="pub-journal">bioRxiv · Under review at <em>PLOS Pathogens</em></div>
+          <div class="pub-doi">doi: 10.1101/2025.XX.XX.XXXXXX</div>
+          <div class="pub-actions">
+            <a href="https://biorxiv.org" class="pub-act" target="_blank">Preprint</a>
+            <a href="#" class="pub-act">Code</a>
+          </div>
+        </div>
+      </div>
+      <div class="pub-entry">
+        <div class="pub-year">2024</div>
+        <div>
+          <span class="pub-badge">Journal Article</span>
+          <div class="pub-title">Suppression of Interferon-Stimulated Genes by [Virus] Replication Complex Reveals Broad Antiviral Escape Mechanism</div>
+          <div class="pub-authors"><strong>Your Name</strong>, Co-Author A, Prof. Supervisor</div>
+          <div class="pub-journal"><em>Journal of Virology</em> · 98(4):e01523-23</div>
+          <div class="pub-doi">doi: 10.1128/jvi.01523-23</div>
+          <div class="pub-actions">
+            <a href="#" class="pub-act">Full text</a>
+            <a href="#" class="pub-act">PubMed</a>
+          </div>
+        </div>
+      </div>
+      <div class="pub-entry">
+        <div class="pub-year">2024</div>
+        <div>
+          <span class="pub-badge">Conference Talk</span>
+          <div class="pub-title">A Tolerised Macrophage Subpopulation Revealed by scRNA-seq Supports Intracellular Pathogen Replication</div>
+          <div class="pub-authors"><strong>Your Name</strong>, Prof. Supervisor</div>
+          <div class="pub-journal">[Society for Microbiology Annual Conference] · [City], July 2024</div>
+          <div class="pub-actions">
+            <a href="#" class="pub-act">Slides</a>
+          </div>
+        </div>
+      </div>
+      <div class="pub-entry">
+        <div class="pub-year">2023</div>
+        <div>
+          <span class="pub-badge">Journal Article</span>
+          <div class="pub-title">Whole-Genome Sequencing of Clinical [Pathogen] Isolates Identifies Novel Virulence-Associated SNPs</div>
+          <div class="pub-authors">Co-Author A, <strong>Your Name</strong>, Co-Author B, MSc Supervisor</div>
+          <div class="pub-journal"><em>Microbial Genomics</em> · 9(6):000994</div>
+          <div class="pub-doi">doi: 10.1099/mgen.0.000994</div>
+          <div class="pub-actions">
+            <a href="#" class="pub-act">Full text</a>
+            <a href="#" class="pub-act">Data</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section id="contact">
+    <div class="sec-label reveal">Contact</div>
+    <h2 class="reveal">Let's advance<br><em>infectious disease research.</em></h2>
+    <div class="contact-layout">
+      <div class="contact-left reveal">
+        <p>
+          I welcome conversations about research collaborations, speaking invitations,
+          postdoctoral opportunities, and science communication. Whether you work in
+          academia, industry, or public health — if you are tackling infectious disease,
+          I would love to connect.
+        </p>
+        <a href="mailto:yourname@university.edu" class="contact-email">yourname@university.edu</a>
+        <div class="contact-social">
+          <a href="https://linkedin.com/in/yourusername" class="csoc" target="_blank">
+            <div class="csoc-icon">in</div> LinkedIn — /in/yourusername
+          </a>
+          <a href="https://github.com/yourusername" class="csoc" target="_blank">
+            <div class="csoc-icon">gh</div> GitHub — /yourusername
+          </a>
+          <a href="https://orcid.org/0000-0000-0000-0000" class="csoc" target="_blank">
+            <div class="csoc-icon">id</div> ORCID — 0000-0000-0000-0000
+          </a>
+          <a href="https://scholar.google.com" class="csoc" target="_blank">
+            <div class="csoc-icon">gs</div> Google Scholar
+          </a>
+          <a href="https://researchgate.net" class="csoc" target="_blank">
+            <div class="csoc-icon">rg</div> ResearchGate
+          </a>
+        </div>
+      </div>
+      <div class="contact-right reveal reveal-delay-1">
+        <div class="cta-box">
+          <h3>Download my full CV</h3>
+          <p>Includes my complete publication list, conference presentations, teaching experience, and references.</p>
+          <a href="cv.pdf" class="btn btn-white" target="_blank">Download CV (PDF)</a>
+        </div>
+        <div class="cta-box" style="background:var(--red-light);border:1px solid rgba(181,18,27,.15)">
+          <h3 style="color:var(--red)">PhD / Postdoc Availability</h3>
+          <p style="color:var(--ink2);opacity:1">Currently in my PhD, expected to graduate [Year]. Open to postdoctoral positions, especially in [region / topic area].</p>
+          <a href="mailto:yourname@university.edu" class="btn btn-red">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <span>© 2026 Your Name · All rights reserved</span>
+    <span>PhD Researcher · Microbiology &amp; Infectious Disease · <a href="#">[Your University]</a></span>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const io = new IntersectionObserver(
+      es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      { threshold: 0.08 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
