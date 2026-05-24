@@ -180,6 +180,28 @@
     .cv-desc { font-size: .87rem; color: #444; margin-top: .4rem; line-height: 1.65; }
     .cv-desc ul { padding-left: 1rem; }
     .cv-desc li { margin-bottom: .2rem; }
+    /* ── Theme toggle ── */
+    body.dark {
+      --bg:     #0f0f0f;
+      --ink:    #e8e8e2;
+      --muted:  #888880;
+      --light:  #1a1a1a;
+      --border: #2a2a2a;
+      --accent: #4ade80;
+    }
+    body.dark nav { background: rgba(15,15,15,.96); }
+    body.dark .home-bio { color: #bbb; }
+    body.dark .cv-desc  { color: #aaa; }
+    body.dark .pub-item { color: #aaa; }
+    .theme-btn {
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); cursor: pointer;
+      padding: .28rem .65rem; border-radius: 3px;
+      font-size: 1rem; line-height: 1;
+      transition: border-color .2s, color .2s;
+      display: flex; align-items: center;
+    }
+    .theme-btn:hover { border-color: var(--ink); color: var(--ink); }  
     .cv-download {
       display: inline-flex; align-items: center; gap: .4rem;
       font-size: .82rem; font-weight: 500; color: var(--accent);
@@ -246,6 +268,7 @@
         <li><a href="#" onclick="showPage('research')" data-page="research">Research</a></li>
         <li><a href="#" onclick="showPage('blogs')"    data-page="blogs">Blogs &amp; Articles</a></li>
         <li><a href="#" onclick="showPage('contact')"  data-page="contact">Connect</a></li>
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>  
       </ul>
     </div>
   </nav>
@@ -576,6 +599,16 @@
       // Hide all pages
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      // Theme toggle
+    const themeBtn = document.getElementById('themeBtn');
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.classList.add('dark');
+      themeBtn.textContent = '☀️';
+    }
+    themeBtn.addEventListener('click', () => {
+      const isDark = document.body.classList.toggle('dark');
+      themeBtn.textContent = isDark ? '☀️' : '🌙';
+    });
       // Show target
       document.getElementById('page-' + name).classList.add('active');
       document.querySelector('[data-page="' + name + '"]').classList.add('active');
