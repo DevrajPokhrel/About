@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Devraj Pokhrel</title>
-  <link rel="icon" type="image/png" href="favicon.jpg">
+  <link rel="icon" type="image/png" href="C:\Users\User\Downloads\favicon.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -46,9 +46,15 @@
     }
 
     .wrap {
-      max-width: 860px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 0 1.8rem;
+      padding: 0 2rem;
+    }
+
+    @media (min-width: 1400px) {
+      .wrap {
+        max-width: 1200px;
+      }
     }
 
     /* navigation */
@@ -61,85 +67,150 @@
     }
 
     .nav-inner {
-      max-width: 860px;
+      max-width: 1300px;
       margin: 0 auto;
-      padding: 0.85rem 1.8rem;
+      padding: 0.85rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .nav-logo {
-      font-family: var(--serif);
+    /* rotating logo */
+    .nav-logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      text-decoration: none;
+      min-width: 200px;
+    }
+    .logo-rotating-box {
+      width: 40px;
+      height: 40px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
       font-size: 1rem;
+      color: white;
+      font-family: var(--sans);
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+    .rotating-text {
+      font-family: var(--serif);
+      font-size: 1.5rem;
       font-weight: 600;
       color: var(--ink);
-      text-decoration: none;
       letter-spacing: -0.2px;
+      white-space: nowrap;
     }
 
+    /* desktop navigation */
     .nav-links {
       display: flex;
-      gap: 0.2rem;
+      gap: 0.3rem;
       align-items: center;
       list-style: none;
     }
-
     .nav-links li {
       display: inline-block;
     }
-
-    .nav-links a, .nav-links .theme-btn {
+    .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: 450;
-      padding: 0.3rem 0.85rem;
-      transition: color 0.2s;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.45rem 1rem;
+      transition: all 0.2s;
       background: none;
       border: none;
       cursor: pointer;
       font-family: var(--sans);
+      border-radius: 40px;
     }
-
     .nav-links a:hover, .nav-links a.active {
       color: var(--ink);
+      background: var(--light);
     }
-
-    .theme-btn {
+    .theme-btn-desktop {
       background: transparent;
       border: 1px solid var(--border);
       border-radius: 40px;
-      padding: 0.2rem 0.7rem;
+      padding: 0.35rem 0.9rem;
       font-size: 1rem;
       line-height: 1.4;
-      margin-left: 0.4rem;
+      margin-left: 0.3rem;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.2s;
     }
-
-    .theme-btn:hover {
+    .theme-btn-desktop:hover {
       border-color: var(--ink);
       color: var(--ink);
     }
 
-    .hamburger {
+    /* mobile elements */
+    .mobile-controls {
       display: none;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .theme-btn-mobile {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 0.3rem 0.8rem;
+      font-size: 1rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+    .hamburger {
       background: none;
       border: none;
       cursor: pointer;
-      padding: 0.25rem;
+      padding: 0.3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
-
     .hamburger span {
       display: block;
-      width: 22px;
+      width: 24px;
       height: 2px;
       background: var(--ink);
-      margin: 5px 0;
-      transition: 0.2s;
+      border-radius: 2px;
     }
 
-    @media (max-width: 680px) {
-      .nav-links {
+    #mobileMenu {
+      display: none;
+    }
+
+    @media (max-width: 780px) {
+      .nav-inner {
+        padding: 0.8rem 1.5rem;
+      }
+      #navLinksDesktop {
+        display: none;
+      }
+      .mobile-controls {
+        display: flex;
+      }
+      .nav-logo-wrapper {
+        min-width: auto;
+      }
+      .rotating-text {
+        font-size: 0.9rem;
+      }
+      .logo-rotating-box {
+        width: 38px;
+        height: 38px;
+        font-size: 0.85rem;
+      }
+      #mobileMenu {
         display: none;
         flex-direction: column;
         position: absolute;
@@ -148,19 +219,17 @@
         right: 0;
         background: var(--bg);
         border-bottom: 1px solid var(--border);
-        padding: 1rem 2rem 1.5rem;
+        padding: 1.2rem 1.5rem 1.5rem;
         align-items: flex-start;
-        gap: 0.8rem;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.02);
+        gap: 0.6rem;
+        z-index: 99;
       }
-      .nav-links.open {
+      #mobileMenu.open {
         display: flex;
       }
-      .hamburger {
-        display: block;
-      }
-      .theme-btn {
-        margin-left: 0;
+      #mobileMenu a {
+        width: 100%;
+        padding: 0.5rem 0;
       }
     }
 
@@ -171,13 +240,13 @@
     }
     .page.active {
       display: block;
-      animation: fade 0.2s ease;
+      animation: fade 0.25s ease;
     }
-    @keyframes fade { from { opacity: 0; } to { opacity: 1; }}
+    @keyframes fade { from { opacity: 0; transform: translateY(5px);} to { opacity: 1; transform: translateY(0);}}
 
     h1.page-title {
       font-family: var(--serif);
-      font-size: 1.9rem;
+      font-size: 2rem;
       font-weight: 600;
       letter-spacing: -0.01em;
       margin-bottom: 2rem;
@@ -186,36 +255,48 @@
 
     h2.sec-head {
       font-family: var(--serif);
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 600;
       margin: 2.5rem 0 1rem;
-      padding-bottom: 0.45rem;
+      padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border);
-      color: var(--ink);
     }
 
     /* home grid */
     .home-grid {
       display: grid;
-      grid-template-columns: 1fr 200px;
-      gap: 2.5rem;
+      grid-template-columns: 1fr 260px;
+      gap: 3rem;
       align-items: start;
       padding-top: 1rem;
     }
-
-    .photo-img {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 6px;
-      background: var(--light);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-      display: block;
+    .home-left {
+      display: flex;
+      flex-direction: column;
     }
-
+    .insight-note {
+      background: var(--light);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.3rem;
+      margin: 1.2rem 0 1.8rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+    }
+    .photo-img {
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 16px;
+      background: var(--light);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      display: block;
+      margin: 0 auto;
+    }
     .home-headline {
       font-family: var(--serif);
-      font-size: clamp(1.5rem, 4vw, 2.3rem);
+      font-size: clamp(1.5rem, 4.5vw, 2.4rem);
       font-weight: 600;
       line-height: 1.25;
       margin-bottom: 1.5rem;
@@ -225,8 +306,7 @@
       font-style: italic;
     }
     .home-bio {
-      font-size: 0.95rem;
-      color: var(--ink);
+      font-size: 0.96rem;
       opacity: 0.9;
     }
     .home-bio p {
@@ -234,18 +314,17 @@
     }
     .link-btn {
       display: inline-block;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       font-weight: 500;
       color: var(--accent);
       text-decoration: none;
-      border-bottom: 1px solid var(--accent);
+      border-bottom: 1.5px solid var(--accent);
       padding-bottom: 2px;
-      margin-right: 1.8rem;
-      transition: opacity 0.2s;
+      margin-right: 2rem;
     }
     .social-row {
       display: flex;
-      gap: 0.8rem;
+      gap: 1rem;
       flex-wrap: wrap;
       margin-top: 2rem;
     }
@@ -257,8 +336,8 @@
       color: var(--muted);
       text-decoration: none;
       border: 1px solid var(--border);
-      padding: 0.25rem 0.8rem;
-      border-radius: 30px;
+      padding: 0.3rem 0.9rem;
+      border-radius: 40px;
       transition: 0.2s;
     }
     .soc svg {
@@ -266,19 +345,17 @@
       height: 13px;
       fill: currentColor;
     }
-    .soc:hover {
-      border-color: var(--ink);
-      color: var(--ink);
-    }
-    @media (max-width: 620px) {
+    @media (max-width: 780px) {
       .home-grid {
         grid-template-columns: 1fr;
-        gap: 1.8rem;
+        gap: 2rem;
       }
-      .photo-img { width: 140px; height: 140px; }
+      .photo-img {
+        max-width: 180px;
+      }
     }
 
-    /* CV styling */
+    /* CV styling (shortened) */
     .cv-download {
       display: inline-flex;
       align-items: center;
@@ -289,56 +366,50 @@
       border: 1px solid var(--accent);
       padding: 0.45rem 1.2rem;
       text-decoration: none;
-      border-radius: 30px;
+      border-radius: 40px;
       margin-bottom: 2rem;
-      transition: 0.2s;
-    }
-    .cv-download:hover {
-      background: var(--accent);
-      color: var(--bg);
     }
     .cv-entry {
       display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 1.5rem;
+      grid-template-columns: 150px 1fr;
+      gap: 1.8rem;
       padding: 1rem 0;
       border-bottom: 1px solid var(--border);
       align-items: start;
     }
-    .cv-date { font-size: 0.8rem; color: var(--muted); }
-    .cv-role { font-weight: 500; font-size: 0.95rem; }
+    .cv-date { font-size: 0.8rem; color: var(--muted); font-weight: 500;}
+    .cv-role { font-weight: 600; font-size: 0.96rem; }
     .cv-org { font-size: 0.85rem; color: var(--muted); margin: 0.2rem 0 0.3rem; }
     .cv-desc { font-size: 0.85rem; opacity: 0.85; }
-    .cv-desc ul { padding-left: 1.2rem; margin-top: 0.2rem; }
-    @media (max-width: 560px) { .cv-entry { grid-template-columns: 1fr; gap: 0.3rem; } }
+    @media (max-width: 680px) { .cv-entry { grid-template-columns: 1fr; gap: 0.4rem; } }
 
-    /* research */
+    /* Research & blogs (simplified) */
     .pub-list { list-style: none; }
     .pub-item {
       font-size: 0.92rem;
       padding: 0.6rem 0 0.6rem 1rem;
       border-left: 2px solid var(--border);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
     }
     .badge {
       display: inline-block;
       font-size: 0.65rem;
-      font-weight: 500;
+      font-weight: 600;
       text-transform: uppercase;
-      padding: 0.1rem 0.55rem;
-      margin-right: 0.6rem;
-      border-radius: 12px;
+      padding: 0.1rem 0.6rem;
+      margin-right: 0.7rem;
+      border-radius: 20px;
       background: var(--light);
       color: var(--muted);
     }
     .badge.conf { background: #e0f2e9; color: #1f6e43; }
     body.dark .badge.conf { background: #1f3e33; color: #7fdc9c; }
     .badge.oped { background: #fff0e0; color: #b45309; }
+    body.dark .badge.oped { background: #442c1a; color: #f3a66b; }
     .wip-list { list-style: none; margin-left: 0; }
-    .wip-list li { font-size: 0.9rem; padding-left: 1rem; margin-bottom: 0.4rem; position: relative; }
-    .wip-list li::before { content: "—"; position: absolute; left: 0; color: var(--muted); }
+    .wip-list li { font-size: 0.9rem; padding-left: 1rem; margin-bottom: 0.5rem; position: relative; }
+    .wip-list li::before { content: "—"; position: absolute; left: 0; color: var(--accent); opacity: 0.7;}
 
-    /* BLOG section – modern card */
     .blog-masthead { margin-bottom: 2.5rem; }
     .blog-description {
       font-size: 1rem;
@@ -356,13 +427,12 @@
       border-bottom: 1px solid var(--border);
       padding-bottom: 2rem;
     }
-    .blog-card:last-child { border-bottom: none; padding-bottom: 0; }
-    .blog-meta { font-family: var(--sans); }
-    .blog-date {
-      font-size: 0.78rem;
+    .blog-card:last-child { border-bottom: none; }
+    .blog-meta .blog-date {
+      font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--accent);
       margin-bottom: 0.5rem;
     }
@@ -371,8 +441,8 @@
       font-weight: 500;
       background: var(--light);
       display: inline-block;
-      padding: 0.2rem 0.7rem;
-      border-radius: 20px;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
       color: var(--muted);
       border: 1px solid var(--border);
     }
@@ -383,132 +453,152 @@
       line-height: 1.3;
       margin-bottom: 0.5rem;
     }
-    .blog-content h3 a {
-      color: var(--ink);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
+    .blog-content h3 a { color: var(--ink); text-decoration: none; }
     .blog-content h3 a:hover { color: var(--accent); }
-    .blog-excerpt {
-      font-size: 0.92rem;
-      color: var(--ink);
-      opacity: 0.8;
-      margin: 0.6rem 0 0.8rem;
-      line-height: 1.6;
-    }
+    .blog-excerpt { font-size: 0.92rem; opacity: 0.8; margin: 0.6rem 0 0.8rem; }
     .blog-readmore {
       font-size: 0.8rem;
       font-weight: 500;
       color: var(--accent);
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
       border-bottom: 1px solid transparent;
-      transition: border-color 0.2s;
     }
-    .blog-readmore:hover { border-bottom-color: var(--accent); }
-    @media (max-width: 680px) {
-      .blog-card { grid-template-columns: 1fr; gap: 0.8rem; }
-      .blog-meta { display: flex; flex-wrap: wrap; gap: 0.8rem; }
-    }
-    .archive-note {
-      margin-top: 2rem;
-      padding-top: 1rem;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-    }
+    @media (max-width: 680px) { .blog-card { grid-template-columns: 1fr; gap: 0.8rem; } }
 
-    /* ========= CONTACT PAGE – redesigned like sagarkhadka.info.np (card grid style) ========= */
-    .contact-grid {
+    /* ========= NEW CONTACT PAGE LAYOUT ========= */
+    .contact-two-column {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0 1.5rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 1rem;
     }
-    .contact-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.8rem 1.5rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-    }
-    .contact-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.05);
-      border-color: var(--accent);
-    }
-    .contact-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--light);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.2rem;
-    }
-    .contact-icon svg {
-      width: 24px;
-      height: 24px;
-      stroke: var(--accent);
-      stroke-width: 1.7;
-      fill: none;
-    }
-    body.dark .contact-icon svg {
-      stroke: var(--accent);
-    }
-    .contact-card h3 {
+    .contact-info h2 {
       font-family: var(--serif);
-      font-size: 1.2rem;
+      font-size: 1.6rem;
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
       color: var(--ink);
     }
-    .contact-detail {
-      font-size: 0.92rem;
-      color: var(--ink);
-      opacity: 0.85;
-      word-break: break-word;
-      margin-top: 0.5rem;
-      line-height: 1.5;
+    .contact-info p.intro {
+      margin-bottom: 2rem;
+      color: var(--muted);
+      font-size: 0.95rem;
     }
-    .contact-detail a {
+    .contact-details {
+      margin: 2rem 0;
+    }
+    .contact-detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-detail-item .emoji {
+      font-size: 1.2rem;
+      min-width: 28px;
+    }
+    .contact-detail-item .label {
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+      font-size: 0.9rem;
+    }
+    .contact-detail-item .value {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .contact-detail-item .value a {
       color: var(--ink);
       text-decoration: none;
       border-bottom: 1px dotted var(--border);
-      transition: border-color 0.2s;
     }
-    .contact-detail a:hover {
+    .contact-detail-item .value a:hover {
+      color: var(--accent);
       border-bottom-color: var(--accent);
-      color: var(--accent);
     }
-    .contact-note {
-      background: var(--light);
-      border-radius: 20px;
-      padding: 1.4rem 2rem;
-      margin-top: 2rem;
-      text-align: center;
+    .follow-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .follow-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
       border: 1px solid var(--border);
-      font-size: 0.92rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      color: var(--ink);
+      transition: 0.2s;
     }
-    .contact-note strong {
-      color: var(--accent);
+    .follow-links a:hover {
+      border-color: var(--accent);
+      background: var(--light);
     }
-    .inline-icon {
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 0.3rem;
+    .follow-links svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
     }
-    @media (max-width: 640px) {
-      .contact-card {
-        padding: 1.5rem;
-      }
-      .contact-note {
-        padding: 1rem 1.2rem;
+
+    /* contact form */
+    .contact-form h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--ink);
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: var(--ink);
+    }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      color: var(--ink);
+      transition: 0.2s;
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .send-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .send-btn:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+    }
+    @media (max-width: 780px) {
+      .contact-two-column {
+        grid-template-columns: 1fr;
+        gap: 2rem;
       }
     }
     footer {
@@ -517,6 +607,7 @@
       font-size: 0.75rem;
       color: var(--muted);
       text-align: center;
+      margin-top: 1rem;
     }
   </style>
 </head>
@@ -524,60 +615,69 @@
 
 <nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#" data-nav="home">Devraj Pokhrel</a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="navLinks">
+    <div class="nav-logo-wrapper" id="animatedLogo">
+      <div class="logo-rotating-box" id="rotatingIcon">DP</div>
+      <span class="rotating-text" id="rotatingName">Devraj Pokhrel</span>
+    </div>
+    <ul class="nav-links" id="navLinksDesktop">
       <li><a href="#" data-nav="home" class="active">About</a></li>
       <li><a href="#" data-nav="cv">CV</a></li>
       <li><a href="#" data-nav="research">Research</a></li>
       <li><a href="#" data-nav="blogs">Blogs</a></li>
       <li><a href="#" data-nav="contact">Connect</a></li>
-      <li><button class="theme-btn" id="themeToggleBtn" aria-label="Dark mode">🌙</button></li>
+      <li><button class="theme-btn-desktop" id="themeBtnDesktop">🌙</button></li>
     </ul>
+    <div class="mobile-controls">
+      <button class="theme-btn-mobile" id="themeBtnMobile">🌙</button>
+      <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+    </div>
   </div>
+  <ul class="nav-links" id="mobileMenu">
+    <li><a href="#" data-nav="home">About</a></li>
+    <li><a href="#" data-nav="cv">CV</a></li>
+    <li><a href="#" data-nav="research">Research</a></li>
+    <li><a href="#" data-nav="blogs">Blogs</a></li>
+    <li><a href="#" data-nav="contact">Connect</a></li>
+  </ul>
 </nav>
 
-<!-- HOME -->
+<!-- HOME page (unchanged) -->
 <div class="page active" id="page-home">
   <div class="wrap">
     <div class="home-grid">
-      <div>
+      <div class="home-left">
         <h1 class="home-headline">I decode <em>how pathogens</em> defeat<br>our defences — and how we fight back.</h1>
         <div class="home-bio">
           <p><strong>Devraj Pokhrel</strong> — molecular biologist & infectious disease researcher, Kathmandu, Nepal. BSc Biotechnology (Purbanchal University). Research Assistant at <strong>NIRI</strong> and <strong>CHDS</strong>.</p>
           <p>My work focuses on antimicrobial resistance (AMR), host–pathogen interactions, and functional genomics. I combine wet-lab microbiology with NGS pipelines (DNA‑seq, RNA‑seq, metagenomics).</p>
           <p>Mentor to 11 undergrad theses; writer on science and health policy.</p>
         </div>
-        <div class="home-cta">
-          <a class="link-btn" href="#" data-nav="research">Research</a>
-          <a class="link-btn" href="#" data-nav="cv">Full CV</a>
-        </div>
+        <div class="insight-note"><strong>📌 Open to collaborations</strong> — AMR surveillance, bioinformatics mentoring, and science writing. Let's connect.</div>
+        <div class="home-cta"><a class="link-btn" href="#" data-nav="research">Research</a><a class="link-btn" href="#" data-nav="cv">Full CV</a></div>
         <div class="social-row">
           <a class="soc" href="http://www.linkedin.com/in/devrajpokhrel03" target="_blank"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z"/></svg> LinkedIn</a>
           <a class="soc" href="https://github.com/DevrajPokhrel3" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.84 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
           <a class="soc" href="mailto:devrajpokhrl@gmail.com"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 2-8 5-8-5h16zm0 12H4V9l8 5 8-5v9z"/></svg> Email</a>
         </div>
       </div>
-      <div><img src="1000060397.jpg" alt="Description of the image" width="350"></div>
+      <div><img src="1000060397.jpg" alt="Devraj Pokhrel" class="photo-img" onerror="this.src='https://placehold.co/400x400/e8e8e4/2d6a4f?text=Devraj'"></div>
     </div>
   </div>
 </div>
 
-<!-- CV page -->
+<!-- CV page (short) -->
 <div class="page" id="page-cv">
   <div class="wrap">
     <h1 class="page-title">Curriculum Vitae</h1>
     <a class="cv-download" href="#" onclick="alert('CV PDF available on request'); return false;">📄 Download PDF</a>
-    <div class="cv-section"><h2 class="sec-head">Education</h2><div class="cv-entry"><div class="cv-date">2018–2023</div><div><div class="cv-role">BSc Biotechnology</div><div class="cv-org">Purbanchal University, Nepal</div><div class="cv-desc">Thesis: Association of GSTM1 and GSTT1 gene polymorphism with ischemic stroke risk.</div><div class="cv-desc">TRelevant Coursework: Microbiology, Molecular Biology I & II, Biochemistry I & II, Bioinformatics, Biostatistics, Research Methodology.</div></div></div></div>
+    <div class="cv-section"><h2 class="sec-head">Education</h2><div class="cv-entry"><div class="cv-date">2018 – 2023</div><div><div class="cv-role">B. Sc. Biotechnology</div><div class="cv-org">Purbanchal University, Nepal</div><div class="cv-desc">Thesis: GSTM1 and GSTT1 gene polymorphism with ischemic stroke risk.</div></div></div></div>
     <div class="cv-section"><h2 class="sec-head">Research Experience</h2>
       <div class="cv-entry"><div class="cv-date">July 2024 – Present</div><div><div class="cv-role">Research Assistant (part-time)</div><div class="cv-org">Nexus Institute of Research and Innovation (NIRI), Lalitpur, Nepal</div><div class="cv-desc">One Health antifungal resistance review; national summit presentation.</div></div></div>
       <div class="cv-entry"><div class="cv-date">June 2024 – Present</div><div><div class="cv-role">Research Assistant</div><div class="cv-org">Center of Health and Disease Studies (CHDS), Lalitpur, Nepal</div><div class="cv-desc">Dengue surveillance, phytochemical antimicrobials.</div></div></div>
       <div class="cv-entry"><div class="cv-date">January 2024 - June 2024</div><div><div class="cv-role">Bioinformatics Intern</div><div class="cv-org">Dr. Omics Labs (remote)</div><div class="cv-desc">NGS pipelines: GATK, STAR, QIIME2, RNA-seq.</div></div></div>
       <div class="cv-entry"><div class="cv-date">May 2023 - October 2023</div><div><div class="cv-role">Student Intern</div><div class="cv-org">Annapurna Research Center(ARC), Kathmandu, Nepal</div><div class="cv-desc">NGS pipelines: GATK, STAR, QIIME2, RNA-seq.</div></div></div>
-    </div>
-    <div class="cv-section"><h2 class="sec-head">Skills</h2><div class="cv-entry"><div class="cv-date">Laboratory:</div><div>DNA/RNA extraction, PCR/RT-qPCR, Gel electrophoresis, Tissue culture, Bacterial Culture, Natural product isolation, Microbial assays</div></div><div class="cv-entry"><div class="cv-date">Programming:</div><div>Python (Biopython), R (Bioconductor, ggplot2), Linux/Bash</div></div><div class="cv-entry"><div class="cv-date">NGS Analysis:</div><div>Variant Calling (GATK, SAMtools), RNA-seq (STAR, Trinity, edgeR, Cufflinks, DESeq2), Metagenomics (QIIME2, KRONA, diversity and taxonomic profiling), microarray analysis (Limma, Affy).</div></div><div class="cv-entry"><div class="cv-date">Databases:</div><div>NCBI (SRA, GEO, GenBank, Entrez), UCSC Genome Browser, Ensembl, PDB, TCGA, PANTHERdb, STRING</div></div><div class="cv-entry"><div class="cv-date">Data Analysis & Software:</div><div>BWA, bowtie, Limma, VEP, IGV, MEGA</div></div><div class="cv-entry"><div class="cv-date">Softskills:</div><div>Leadership, Collaboration, Problem Solving, Scientific Communication, Critical Thinking</div></div><div class="cv-entry"><div class="cv-date">Language:</div><div>Nepali, English, Hindi</div></div></div>
+  </div>
+  <div class="cv-section"><h2 class="sec-head">Skills</h2><div class="cv-entry"><div class="cv-date">Laboratory:</div><div>DNA/RNA extraction, PCR/RT-qPCR, Gel electrophoresis, Tissue culture, Bacterial Culture, Natural product isolation, Microbial assays</div></div><div class="cv-entry"><div class="cv-date">Programming:</div><div>Python (Biopython), R (Bioconductor, ggplot2), Linux/Bash</div></div><div class="cv-entry"><div class="cv-date">NGS Analysis:</div><div>Variant Calling (GATK, SAMtools), RNA-seq (STAR, Trinity, edgeR, Cufflinks, DESeq2), Metagenomics (QIIME2, KRONA, diversity and taxonomic profiling), microarray analysis (Limma, Affy).</div></div><div class="cv-entry"><div class="cv-date">Databases:</div><div>NCBI (SRA, GEO, GenBank, Entrez), UCSC Genome Browser, Ensembl, PDB, TCGA, PANTHERdb, STRING</div></div><div class="cv-entry"><div class="cv-date">Data Analysis & Software:</div><div>BWA, bowtie, Limma, VEP, IGV, MEGA</div></div><div class="cv-entry"><div class="cv-date">Softskills:</div><div>Leadership, Collaboration, Problem Solving, Scientific Communication, Critical Thinking</div></div><div class="cv-entry"><div class="cv-date">Language:</div><div>Nepali, English, Hindi</div></div></div>
   </div>
 </div>
 
@@ -585,119 +685,124 @@
 <div class="page" id="page-research">
   <div class="wrap">
     <h1 class="page-title">Research</h1>
-    <h2 class="sec-head">📄 Conference Presentation</h2>
-    <ul class="pub-list"><li class="pub-item"><span class="badge conf">Oral</span> <strong>Pokhrel, D.</strong>, Maharjan A., Parajuli S., Dulal S. (2026). Burden of Antifungal Resistance in Nepal. <em>12th National Summit of Health Scientists</em>, Kathmandu.</li>
-    <h2 class="sec-head">✍️ Working papers</h2>
-    <ul class="wip-list"><li>"Escalating Threats of Antifungal Drug Resistance in Nepal: One Health Perspective"</li><li>"Policy Analysis of AMR in Nepal: Gaps and Recommendations"</li></ul>
-    <h2 class="sec-head">✍️ OpEd</h2>
-    <ul class="pub-list"><li class="pub-item"><span class="badge conf">OpEd</span>"1. <strong>Pokhrel, D.</strong>, & Dulal, S., (2026 May 4). Aeroallergens: Nepal’s Ignored Biological Threat. The Rising Nepal, 4."</li><li>"2. <strong>Pokhrel, D.</strong>, & Dulal, S., (2026 January 1). Health System Needs Precision Medicine. The Rising Nepal, 4."</li><li>"3. <strong>Pokhrel, D.</strong>, & Dulal, S., (2024 December 19). Rising threat of antifungal resistance. The Annapurna Express, 4."</li></ul>
-    <h2 class="sec-head">🔬 Interests</h2>
-    <ul class="wip-list"><li>Antimicrobial resistance · One Health</li><li>Peptide therapeutics & functional genomics</li><li>Host–pathogen interactions · NGS bioinformatics</li></ul>
+    <h2 class="sec-head">📄 Conference</h2><ul class="pub-list"><li class="pub-item"><span class="badge conf">Oral</span> <strong>Pokhrel, D.</strong> et al. (2026). Burden of Antifungal Resistance in Nepal. <em>12th National Summit</em>.</li></ul>
+    <h2 class="sec-head">✍️ Op-Eds</h2><ul class="pub-list"><li class="pub-item"><span class="badge oped">Op-Ed</span> <strong>Pokhrel, D.</strong> & Dulal, S. (May 2026). Aeroallergens: Nepal's Ignored Threat. <em>The Rising Nepal</em>.</li><li class="pub-item"><span class="badge oped">Op-Ed</span> <strong>Pokhrel, D.</strong> & Dulal, S. (Jan 2026). Health System Needs Precision Medicine. <em>The Rising Nepal</em>.</li><li class="pub-item"><span class="badge oped">Op-Ed</span> <strong>Pokhrel, D.</strong> & Dulal, S. (Dec 2024). Rising threat of antifungal resistance. <em>The Annapurna Express</em>.</li></ul>
+    <h2 class="sec-head">🔬 Interests</h2><ul class="wip-list"><li>Antimicrobial Resistance · One Health</li><li>Functional genomics & NGS bioinformatics</li><li>Host–pathogen interactions</li></ul>
   </div>
 </div>
 
-<!-- BLOG section -->
+<!-- BLOGS page -->
 <div class="page" id="page-blogs">
   <div class="wrap">
-    <div class="blog-masthead"><h1 class="page-title">Blogs & Articles</h1><div class="blog-description">Writing at the intersection of infectious disease, public health, and science policy aimed at Nepali and global audiences.</div></div>
-    <div class="blog-grid">
-      <article class="blog-card"><div class="blog-meta"><div class="blog-date">May 4, 2026</div><div class="blog-category">Op-Ed · Public Health</div></div><div class="blog-content"><h3><a href="https://risingnepaldaily.com/news/79695" target="_blank">Aeroallergens: Nepal's Ignored Biological Threat</a></h3><div class="blog-excerpt">This op-ed highlights how Nepal’s air pollution crisis goes beyond dust and chemicals, pointing to overlooked biological pollutants like fungal spores and pollen that significantly impact respiratory health but remain unmonitored and absent from public health policy.</div><a href="https://risingnepaldaily.com/news/79695" target="_blank" class="blog-readmore">Read full article →</a></div></article>
-      <article class="blog-card"><div class="blog-meta"><div class="blog-date">January 1, 2026</div><div class="blog-category">Op-Ed · Precision Medicine</div></div><div class="blog-content"><h3><a href="https://risingnepaldaily.com/news/73443" target="_blank">Health System Needs Precision Medicine</a></h3><div class="blog-excerpt">Nepal’s health system can benefit greatly from adopting precision (genome-based) medicine, moving beyond one-size-fits-all healthcare. Advances in genomics and multi-omics offer opportunities for more accurate diagnosis, targeted treatment, and improved patient outcomes..</div><a href="https://risingnepaldaily.com/news/73443" target="_blank" class="blog-readmore">Read full article →</a></div></article>
-      <article class="blog-card"><div class="blog-meta"><div class="blog-date">December 19, 2024</div><div class="blog-category">Op-Ed · AMR</div></div><div class="blog-content"><h3><a href="https://theannapurnaexpress.com/story/51678/" target="_blank">Rising Threat of Antifungal Resistance</a></h3><div class="blog-excerpt">This op-ed explores the growing challenge of antifungal resistance in Nepal, its impact on public health and agriculture, and the urgent need for policy interventions and improved treatment strategies.</div><a href="https://theannapurnaexpress.com/story/51678/" target="_blank" class="blog-readmore">Read full article →</a></div></article>
-    </div>
-    <div class="archive-note">✍️ More science writing appears regularly in <em>The Rising Nepal</em> and <em>The Annapurna Express</em>.</div>
+    <div class="blog-masthead"><h1 class="page-title">Blogs & Articles</h1><div class="blog-description">Science writing at the intersection of infectious disease, public health, and policy.</div></div>
+    <div class="blog-grid"><article class="blog-card"><div class="blog-meta"><div class="blog-date">May 4, 2026</div><div class="blog-category">Op-Ed</div></div><div class="blog-content"><h3><a href="https://risingnepaldaily.com/news/79695" target="_blank">Aeroallergens: Nepal's Ignored Biological Threat</a></h3><div class="blog-excerpt">Biological pollutants like fungal spores and pollen remain unmonitored in Nepal's air quality discourse.</div><a href="https://risingnepaldaily.com/news/79695" target="_blank" class="blog-readmore">Read →</a></div></article><article class="blog-card"><div class="blog-meta"><div class="blog-date">Jan 1, 2026</div><div class="blog-category">Op-Ed</div></div><div class="blog-content"><h3><a href="https://risingnepaldaily.com/news/73443" target="_blank">Health System Needs Precision Medicine</a></h3><div class="blog-excerpt">Genomics-driven diagnostics could revolutionize healthcare in low-resource settings.</div><a href="https://risingnepaldaily.com/news/73443" target="_blank" class="blog-readmore">Read →</a></div></article><article class="blog-card"><div class="blog-meta"><div class="blog-date">Dec 19, 2024</div><div class="blog-category">Op-Ed</div></div><div class="blog-content"><h3><a href="https://theannapurnaexpress.com/story/51678/" target="_blank">Rising Threat of Antifungal Resistance</a></h3><div class="blog-excerpt">Exploring antifungal stewardship gaps and the One Health response in Nepal.</div><a href="https://theannapurnaexpress.com/story/51678/" target="_blank" class="blog-readmore">Read →</a></div></article></div>
   </div>
 </div>
 
-<!-- ========= CONTACT PAGE: redesigned to match sagarkhadka.info.np style ========= -->
+<!-- ========= NEW CONNECT PAGE (friend's layout) ========= -->
 <div class="page" id="page-contact">
   <div class="wrap">
-    <h1 class="page-title">Let's connect</h1>
-    <div class="contact-grid">
-      <!-- Email card -->
-      <div class="contact-card">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    <div class="contact-two-column">
+      <!-- Left column: Get In Touch & contact info -->
+      <div class="contact-info">
+        <h2>Get In Touch</h2>
+        <p class="intro">Feel free to reach out if you're looking for a researcher, have a question, or just want to connect.</p>
+        <div class="contact-details">
+          <div class="contact-detail-item">
+            <div class="emoji">📧</div>
+            <div><div class="label">Email</div><div class="value"><a href="mailto:devrajpokhrl@gmail.com">devrajpokhrl@gmail.com</a></div></div>
+          </div>
+          <div class="contact-detail-item">
+            <div class="emoji">📍</div>
+            <div><div class="label">Location</div><div class="value">Kathmandu, Nepal</div></div>
+          </div>
+          <div class="contact-detail-item">
+            <div class="emoji">🔗</div>
+            <div><div class="label">Follow Me</div><div class="follow-links">
+              <a href="http://www.linkedin.com/in/devrajpokhrel03" target="_blank"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.25 2.36 4.25 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46C23.2 24 24 23.23 24 22.28V1.72C24 .77 23.2 0 22.23 0z"/></svg> LinkedIn</a>
+              <a href="https://github.com/DevrajPokhrel3" target="_blank"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.84 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
+            </div></div>
+          </div>
         </div>
-        <h3>Email</h3>
-        <div class="contact-detail"><a href="mailto:devrajpokhrl@gmail.com">devrajpokhrl@gmail.com</a></div>
-        <div class="contact-detail" style="font-size:0.8rem; margin-top:0.3rem;">I usually reply within 48 hours.</div>
       </div>
-      <!-- LinkedIn card -->
-      <div class="contact-card">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </div>
-        <h3>LinkedIn</h3>
-        <div class="contact-detail"><a href="http://www.linkedin.com/in/devrajpokhrel03" target="_blank">/in/devrajpokhrel03</a></div>
-        <div class="contact-detail">Professional updates & research networking</div>
+      <!-- Right column: contact form -->
+      <div class="contact-form">
+        <h3>Send Me a Message</h3>
+        <form id="contactForm" onsubmit="alert('Message sent (demo). Thank you!'); return false;">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" placeholder="Subject" required>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="I'd like to discuss about......"></textarea>
+          </div>
+          <button type="submit" class="send-btn">Send Message</button>
+        </form>
       </div>
-      <!-- GitHub card -->
-      <div class="contact-card">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        </div>
-        <h3>GitHub</h3>
-        <div class="contact-detail"><a href="https://https://github.com/DevrajPokhrel" target="_blank">DevrajPokhrel</a></div>
-        <div class="contact-detail">NGS pipelines, bioinformatics scripts, and open science</div>
-      </div>
-    <div class="contact-note">
-      <strong>📍 Based in Kathmandu, Nepal</strong><br/>
-      Open to research collaborations <br/> Feel free to reach out — I'd love to exchange ideas on AMR, genomics, and public health.
     </div>
   </div>
 </div>
 
-<footer><div class="wrap">© 2026 Devraj Pokhrel - B.Sc. Biotechnology</div></footer>
+<footer><div class="wrap">© 2026 Devraj Pokhrel — B.Sc. Biotechnology</div></footer>
 
 <script>
-  (function(){
-    function showPage(pageId){
+  (function() {
+    // Rotating logo
+    const rotatingIcon = document.getElementById('rotatingIcon');
+    const rotatingName = document.getElementById('rotatingName');
+    const states = [
+      { icon: 'DP', name: 'Devraj Pokhrel' },
+      { icon: '🔬', name: 'Devraj Pokhrel' },
+    ];
+    let idx = 0;
+    setInterval(() => {
+      idx = (idx + 1) % states.length;
+      if (rotatingIcon) rotatingIcon.textContent = states[idx].icon;
+      if (rotatingName) rotatingName.textContent = states[idx].name;
+    }, 2400);
+
+    function showPage(pageId) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      const activePage = document.getElementById('page-'+pageId);
-      if(activePage) activePage.classList.add('active');
-      document.querySelectorAll('.nav-links a[data-nav]').forEach(link => {
-        if(link.getAttribute('data-nav') === pageId) link.classList.add('active');
+      const active = document.getElementById('page-' + pageId);
+      if (active) active.classList.add('active');
+      document.querySelectorAll('#navLinksDesktop a[data-nav], #mobileMenu a[data-nav]').forEach(link => {
+        if (link.getAttribute('data-nav') === pageId) link.classList.add('active');
         else link.classList.remove('active');
       });
-      const mobileMenu = document.getElementById('navLinks');
-      if(mobileMenu.classList.contains('open')) mobileMenu.classList.remove('open');
-      window.scrollTo({top:0, behavior:'smooth'});
+      const mobileMenu = document.getElementById('mobileMenu');
+      if (mobileMenu.classList.contains('open')) mobileMenu.classList.remove('open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    document.querySelectorAll('[data-nav]').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = link.getAttribute('data-nav');
-        if(target) showPage(target);
-      });
+    document.querySelectorAll('#navLinksDesktop a[data-nav], #mobileMenu a[data-nav]').forEach(el => {
+      el.addEventListener('click', (e) => { e.preventDefault(); showPage(el.getAttribute('data-nav')); });
     });
+    document.querySelector('.nav-logo-wrapper').addEventListener('click', (e) => { e.preventDefault(); showPage('home'); });
 
-    const logo = document.querySelector('.nav-logo');
-    if(logo) logo.addEventListener('click', (e) => { e.preventDefault(); showPage('home'); });
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hamburger) hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    document.querySelectorAll('#mobileMenu a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.remove('open')));
 
-    const hamburger = document.getElementById('hamburger');
-    const navLinksMenu = document.getElementById('navLinks');
-    if(hamburger){
-      hamburger.addEventListener('click', () => navLinksMenu.classList.toggle('open'));
-    }
-
-    const themeBtn = document.getElementById('themeToggleBtn');
-    function setTheme(isDark){
-      if(isDark){
-        document.body.classList.add('dark');
-        if(themeBtn) themeBtn.textContent = '☀️';
-      } else {
-        document.body.classList.remove('dark');
-        if(themeBtn) themeBtn.textContent = '🌙';
-      }
+    const themeBtnDesktop = document.getElementById('themeBtnDesktop');
+    const themeBtnMobile = document.getElementById('themeBtnMobile');
+    function setTheme(isDark) {
+      if (isDark) { document.body.classList.add('dark'); if (themeBtnDesktop) themeBtnDesktop.textContent = '☀️'; if (themeBtnMobile) themeBtnMobile.textContent = '☀️'; }
+      else { document.body.classList.remove('dark'); if (themeBtnDesktop) themeBtnDesktop.textContent = '🌙'; if (themeBtnMobile) themeBtnMobile.textContent = '🌙'; }
       localStorage.setItem('devraj-theme', isDark ? 'dark' : 'light');
     }
     const saved = localStorage.getItem('devraj-theme');
-    if(saved === 'dark') setTheme(true);
-    else if(saved === 'light') setTheme(false);
-    else if(window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme(true);
-    if(themeBtn) themeBtn.addEventListener('click', () => setTheme(!document.body.classList.contains('dark')));
+    if (saved === 'dark') setTheme(true);
+    else if (saved === 'light') setTheme(false);
+    else if (window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme(true);
+    if (themeBtnDesktop) themeBtnDesktop.addEventListener('click', () => setTheme(!document.body.classList.contains('dark')));
+    if (themeBtnMobile) themeBtnMobile.addEventListener('click', () => setTheme(!document.body.classList.contains('dark')));
+    document.querySelectorAll('#navLinksDesktop a[data-nav="home"], #mobileMenu a[data-nav="home"]').forEach(link => link.classList.add('active'));
   })();
 </script>
 </body>
