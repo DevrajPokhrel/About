@@ -637,4 +637,77 @@
           <svg viewBox="0 0 24 24" stroke="currentColor" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
         </div>
         <h3>GitHub</h3>
-        <div class="contact-detail"><a href="https://github.com/DevrajPokhrel3" target="_blank">DevrajPokhrel3</a
+        <div class="contact-detail"><a href="https://github.com/DevrajPokhrel3" target="_blank">DevrajPokhrel3</a></div>
+        <div class="contact-detail">NGS pipelines, bioinformatics scripts, and open science</div>
+      </div>
+      <!-- Phone card -->
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3>Phone / WhatsApp</h3>
+        <div class="contact-detail"><a href="tel:+9779863622534">+977-9863622534</a></div>
+        <div class="contact-detail">For urgent collaboration (WhatsApp preferred)</div>
+      </div>
+    </div>
+    <div class="contact-note">
+      <strong>📍 Based in Kathmandu, Nepal</strong><br/>
+      Open to research collaborations, graduate school discussions, guest lectures, and science writing opportunities. <br/> Feel free to reach out — I'd love to exchange ideas on AMR, genomics, and public health in South Asia.
+    </div>
+  </div>
+</div>
+
+<footer><div class="wrap">© 2026 Devraj Pokhrel — Molecular biology & infectious disease research</div></footer>
+
+<script>
+  (function(){
+    function showPage(pageId){
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const activePage = document.getElementById('page-'+pageId);
+      if(activePage) activePage.classList.add('active');
+      document.querySelectorAll('.nav-links a[data-nav]').forEach(link => {
+        if(link.getAttribute('data-nav') === pageId) link.classList.add('active');
+        else link.classList.remove('active');
+      });
+      const mobileMenu = document.getElementById('navLinks');
+      if(mobileMenu.classList.contains('open')) mobileMenu.classList.remove('open');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    document.querySelectorAll('[data-nav]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = link.getAttribute('data-nav');
+        if(target) showPage(target);
+      });
+    });
+
+    const logo = document.querySelector('.nav-logo');
+    if(logo) logo.addEventListener('click', (e) => { e.preventDefault(); showPage('home'); });
+
+    const hamburger = document.getElementById('hamburger');
+    const navLinksMenu = document.getElementById('navLinks');
+    if(hamburger){
+      hamburger.addEventListener('click', () => navLinksMenu.classList.toggle('open'));
+    }
+
+    const themeBtn = document.getElementById('themeToggleBtn');
+    function setTheme(isDark){
+      if(isDark){
+        document.body.classList.add('dark');
+        if(themeBtn) themeBtn.textContent = '☀️';
+      } else {
+        document.body.classList.remove('dark');
+        if(themeBtn) themeBtn.textContent = '🌙';
+      }
+      localStorage.setItem('devraj-theme', isDark ? 'dark' : 'light');
+    }
+    const saved = localStorage.getItem('devraj-theme');
+    if(saved === 'dark') setTheme(true);
+    else if(saved === 'light') setTheme(false);
+    else if(window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme(true);
+    if(themeBtn) themeBtn.addEventListener('click', () => setTheme(!document.body.classList.contains('dark')));
+  })();
+</script>
+</body>
+</html>
